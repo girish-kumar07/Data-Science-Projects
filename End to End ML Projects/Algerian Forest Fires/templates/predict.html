@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FWI Prediction - Algerian Forest Fire</title>
-    <!-- Font Awesome -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <!-- Google Font: Poppins -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* ----- RESET & BASE ----- */
+
         * {
             margin: 0;
             padding: 0;
@@ -28,7 +28,6 @@
             flex-direction: column;
         }
 
-        /* 🔥 Animated Background Gradient */
         body::before {
             content: '';
             position: fixed;
@@ -49,7 +48,6 @@
             color: inherit;
         }
 
-        /* ----- SCROLLBAR ----- */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -67,7 +65,6 @@
             background: linear-gradient(180deg, #ff8c5a, #ff4444);
         }
 
-        /* ----- NAVBAR (matching home page) ----- */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -153,7 +150,6 @@
             width: 100%;
         }
 
-        /* ----- MAIN CONTAINER ----- */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -164,7 +160,6 @@
             align-items: center;
         }
 
-        /* ----- PREDICTION CARD ----- */
         .prediction-card {
             background: rgba(26, 26, 26, 0.6);
             backdrop-filter: blur(20px);
@@ -182,7 +177,6 @@
             box-shadow: 0 0 80px rgba(255, 107, 53, 0.08);
         }
 
-        /* ----- HEADER ----- */
         .prediction-header {
             text-align: center;
             margin-bottom: 30px;
@@ -215,7 +209,6 @@
             margin-top: 3px;
         }
 
-        /* ----- FORM SECTIONS ----- */
         .form-section {
             margin-bottom: 25px;
         }
@@ -295,7 +288,6 @@
             border-color: rgba(255, 107, 53, 0.3);
         }
 
-        /* Grid Layout */
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -308,7 +300,6 @@
             gap: 18px;
         }
 
-        /* ----- BUTTON ----- */
         .btn-predict {
             width: 100%;
             padding: 15px;
@@ -338,7 +329,6 @@
             transform: translateY(0);
         }
 
-        /* ----- RESULT ----- */
         .result-container {
             margin-top: 25px;
             padding: 20px 25px;
@@ -392,7 +382,6 @@
             color: #5a4a40;
         }
 
-        /* ----- BACK LINK ----- */
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -413,7 +402,6 @@
             font-size: 1rem;
         }
 
-        /* ----- FOOTER ----- */
         footer {
             background: #0a0a0a;
             color: #5a4a40;
@@ -431,7 +419,6 @@
             font-size: 0.8rem;
         }
 
-        /* ----- RESPONSIVE ----- */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -511,9 +498,6 @@
 </head>
 <body>
 
-    <!-- ========================= -->
-    <!-- NAVBAR -->
-    <!-- ========================= -->
     <header class="navbar" id="navbar">
         <div class="logo">
             <i class="fa-solid fa-fire-flame-curved"></i>
@@ -531,23 +515,17 @@
         </nav>
     </header>
 
-    <!-- ========================= -->
-    <!-- MAIN CONTENT -->
-    <!-- ========================= -->
     <div class="container">
         <div class="prediction-card">
 
-            <!-- Header -->
             <div class="prediction-header">
                 <span class="icon"><i class="fa-solid fa-fire-flame-curved"></i></span>
                 <h1>FWI Prediction</h1>
                 <p>Enter weather parameters to estimate Fire Weather Index</p>
             </div>
 
-            <!-- Form -->
             <form action="{{ url_for('predict_datapoint') }}" method="post">
 
-                <!-- SECTION 1: Weather Parameters -->
                 <div class="form-section">
                     <div class="form-section-title">
                         <i class="fa-solid fa-cloud-sun"></i> Weather Parameters
@@ -578,7 +556,6 @@
                     </div>
                 </div>
 
-                <!-- SECTION 2: FWI Components -->
                 <div class="form-section">
                     <div class="form-section-title">
                         <i class="fa-solid fa-fire"></i> FWI Components
@@ -602,7 +579,6 @@
                     </div>
                 </div>
 
-                <!-- SECTION 3: Classification -->
                 <div class="form-section">
                     <div class="form-section-title">
                         <i class="fa-solid fa-tags"></i> Classification
@@ -626,7 +602,6 @@
                 </button>
             </form>
 
-            <!-- Result -->
             {% if results %}
             <div class="result-container show">
                 <div class="result-label">Predicted Fire Weather Index</div>
@@ -651,7 +626,6 @@
             </div>
             {% endif %}
 
-            <!-- Back Link -->
             <div style="text-align: center; margin-top: 10px;">
                 <a href="/" class="back-link">
                     <i class="fa-solid fa-arrow-left"></i> Back to Home
@@ -661,19 +635,13 @@
         </div>
     </div>
 
-    <!-- ========================= -->
-    <!-- FOOTER -->
-    <!-- ========================= -->
     <footer>
         <p><i class="fa-regular fa-copyright"></i> 2026 FWI Predictor · Algerian Forest Fire Prediction</p>
         <p>Built for learning &amp; awareness</p>
     </footer>
 
-    <!-- ========================= -->
-    <!-- JAVASCRIPT -->
-    <!-- ========================= -->
     <script>
-        // Navbar scroll effect
+        
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -683,7 +651,7 @@
             }
         });
 
-        // Auto-show result if exists
+        
         document.addEventListener('DOMContentLoaded', function() {
             const result = document.querySelector('.result-container.show');
             if (result) {
