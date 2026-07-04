@@ -17,8 +17,8 @@ standard_scaler = pickle.load(open('scaler.pkl','rb'))
 
 
 @app.route("/")
-def index():
-    return render_template('index.html')
+def home():
+    return render_template('home.html')
 
 
 @app.route('/predictdata',methods=['GET','POST'])
@@ -38,11 +38,11 @@ def predict_datapoint():
         result = ridge_model.predict(new_data_scaled)
         
 
-        return render_template('home.html',results=result[0])
+        return render_template('predict.html',results=result[0])
 
     
     else:
-        return render_template('home.html')
+        return render_template('predict.html')
 
 
 
