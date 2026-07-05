@@ -167,25 +167,6 @@ http://127.0.0.1:5000
 
 ---
 
-## 📸 Screenshots
-
-### Home Page
-```
-Coming soon...
-```
-
-### Prediction Form
-```
-Coming soon...
-```
-
-### Results
-```
-Coming soon...
-```
-
----
-
 ## 🧪 API Endpoints
 
 | Endpoint | Method | Description |
@@ -205,12 +186,6 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
