@@ -33,7 +33,7 @@ class DataIngestion:
         logging.info("Enterd the data ingestion method or component")
         
         try:
-            df=pd.read_csv(r'G:\Data Science\Projects\End to End ML Projects\Student Score Prediction\notebook\data\StudentsPerformance.csv')
+            df=pd.read_csv(r"G:\Data Science\Projects\End to End ML Projects\Student Score Prediction\notebook\data\StudentsPerformance.csv")
             logging.info('Read the Dataset as Dataframe')
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
