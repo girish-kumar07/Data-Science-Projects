@@ -92,42 +92,17 @@ Student Score Prediction/
 - Python 3.8 or higher
 - pip package manager
 
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/yourusername/student-score-predictor.git
-cd student-score-predictor
-```
-
-### Step 2: Create Virtual Environment
-```bash
-# Windows
-python -m venv venv
-venv\Scripts\activate
-
-# Mac/Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 3: Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Train the Model (Optional)
+### Train the Model (Optional)
 ```bash
 python src/components/data_ingestion.py
 python src/components/data_transformation.py
 python src/components/model_trainer.py
 ```
 
-### Step 5: Run the Application
+### Run the Application
 ```bash
 python app.py
 ```
-
-### Step 6: Access the Application
-Open your browser and navigate to: `http://127.0.0.1:5000`
 
 ## 📊 ML Models Performance
 
