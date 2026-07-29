@@ -60,3 +60,21 @@ def load_object(file_path):
 
     except Exception as e:
         raise CustomException(e, sys)
+    
+
+def clamp_predictions(predictions, min_val=0, max_val=100):
+    """
+    Clamp predictions to a valid range
+    
+    Args:
+        predictions: array of predictions
+        min_val: minimum allowed value (default: 0)
+        max_val: maximum allowed value (default: 100)
+    
+    Returns:
+        Clamped predictions as numpy array
+    """
+    try:
+        return np.clip(predictions, min_val, max_val)
+    except Exception as e:
+        raise CustomException(e, sys)

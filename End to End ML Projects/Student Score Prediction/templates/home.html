@@ -1,1 +1,1099 @@
-<h1>Welcome to the Home Page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Predictor Pro - Student Performance Analysis</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== PARTICLES ===== */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.15;
+            animation: floatParticle 25s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-brand .logo-icon {
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: white;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: white;
+            color: #e73c7e !important;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            padding-top: 100px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            padding: 40px 60px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-content {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-content h1 .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0 15px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #e73c7e;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 16px 35px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 14px 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== QUICK STATS BAR ===== */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .quick-stat {
+            text-align: center;
+        }
+
+        .quick-stat .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            display: block;
+        }
+
+        .quick-stat .label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== HERO VISUAL ===== */
+        .hero-visual {
+            animation: slideUp 1s ease-out 0.2s both;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .visual-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .visual-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .visual-card .emoji-big {
+            font-size: 60px;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .visual-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .visual-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .feature-list li {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li .check {
+            color: #23d5ab;
+            font-size: 1.1rem;
+        }
+
+        /* ===== 7 FEATURES SECTION ===== */
+        .features-section {
+            padding: 40px 60px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.05rem;
+        }
+
+        /* ===== FEATURES GRID ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card .icon {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .feature-card .feature-name {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .feature-card .feature-desc {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .feature-card .feature-type {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-card.categorical .feature-type {
+            background: rgba(231, 60, 126, 0.2);
+            color: #ff8aae;
+        }
+
+        .feature-card.numerical .feature-type {
+            background: rgba(35, 213, 171, 0.2);
+            color: #6ef0d0;
+        }
+
+        .feature-card.target .feature-type {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-it-works {
+            padding: 40px 60px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .step-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .step-card .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .step-card h4 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ===== TECH EXCELLENCE SECTION (Replaces "Why Choose Us") ===== */
+        .tech-excellence {
+            padding: 40px 60px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .excellence-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .excellence-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .excellence-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .excellence-card .icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .excellence-card h4 {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .excellence-card p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            padding: 30px 60px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .cta-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 50px 60px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .cta-box:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .cta-box h2 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 30px 60px;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-brand h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 20px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                padding: 20px 30px;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .excellence-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero-section {
+                padding: 20px;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .excellence-grid {
+                grid-template-columns: 1fr;
+            }
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            .features-section {
+                padding: 20px;
+            }
+            .how-it-works {
+                padding: 20px;
+            }
+            .tech-excellence {
+                padding: 20px;
+            }
+            .cta-section {
+                padding: 20px;
+            }
+            .cta-box {
+                padding: 30px 20px;
+            }
+            .cta-box h2 {
+                font-size: 1.6rem;
+            }
+            .footer {
+                padding: 20px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-secondary,
+            .hero-buttons .btn-outline {
+                justify-content: center;
+            }
+            .quick-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                padding: 15px;
+            }
+            .quick-stat .number {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== PARTICLES ===== -->
+    <div class="particle" style="width:80px;height:80px;left:5%;background:#ee7752;animation-delay:0s;"></div>
+    <div class="particle" style="width:60px;height:60px;right:10%;background:#e73c7e;animation-delay:5s;"></div>
+    <div class="particle" style="width:100px;height:100px;left:45%;background:#23a6d5;animation-delay:10s;"></div>
+    <div class="particle" style="width:40px;height:40px;left:25%;background:#23d5ab;animation-delay:15s;"></div>
+    <div class="particle" style="width:70px;height:70px;right:30%;background:#f9ca24;animation-delay:8s;"></div>
+    <div class="particle" style="width:50px;height:50px;left:70%;background:#e056a0;animation-delay:20s;"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="/" class="nav-brand">
+            <span class="logo-icon">🎓</span>
+            ScorePredict Pro
+        </a>
+        <div class="nav-links">
+            <a href="/" class="active">Home</a>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#tech">Tech</a>
+            <a href="/predictdata" class="nav-cta">🚀 Predict Now</a>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-container">
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <!-- <span class="hero-badge">⚡ AI-Powered Prediction</span> -->
+                <h1>
+                    Predict <span class="highlight">Student</span><br>
+                    Math Scores with <span class="highlight">ML</span>
+                </h1>
+                <p>
+                    Leverage the power of 7 advanced machine learning algorithms to accurately 
+                    predict student performance in mathematics based on demographic and academic data.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/predictdata" class="btn-primary">
+                        🚀 Start Prediction
+                    </a>
+                    <a href="#features" class="btn-secondary">
+                        View Features →
+                    </a>
+                    <a href="#how-it-works" class="btn-outline">
+                        How It Works
+                    </a>
+                </div>
+                <div class="quick-stats">
+                    <div class="quick-stat">
+                        <span class="number">7</span>
+                        <span class="label">Input Features</span>
+                    </div>
+                    <div class="quick-stat">
+                        <span class="number">7</span>
+                        <span class="label">ML Models</span>
+                    </div>
+                    <div class="quick-stat">
+                        <span class="number">92%</span>
+                        <span class="label">Accuracy</span>
+                    </div>
+                    <div class="quick-stat">
+                        <span class="number">1K+</span>
+                        <span class="label">Predictions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="visual-card">
+                    <span class="emoji-big">📊</span>
+                    <h3>What You'll Need</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="check">👤</span>
+                            Student Demographics (Gender, Race, Education)
+                        </li>
+                        <li>
+                            <span class="check">📚</span>
+                            Academic Details (Lunch, Test Prep)
+                        </li>
+                        <li>
+                            <span class="check">✍️</span>
+                            Reading & Writing Scores
+                        </li>
+                        <li>
+                            <span class="check">🎯</span>
+                            Get Math Score Prediction
+                        </li>
+                    </ul>
+                </div>
+                <div class="visual-card" style="background:rgba(255,255,255,0.04);">
+                    <span class="emoji-big">⚡</span>
+                    <h3>Simple & Fast</h3>
+                    <p>
+                        Enter 7 simple inputs and get instant predictions. No technical expertise needed 
+                        - just fill in the form and get results in seconds.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 7 FEATURES DETAILED SECTION ===== -->
+        <section class="features-section" id="features">
+            <div class="section-header">
+                <h2>🔍 The 7 Key Input Features</h2>
+                <p>Understand exactly what data you need to provide for accurate predictions</p>
+            </div>
+            <div class="features-grid">
+                <!-- Feature 1: Gender -->
+                <div class="feature-card categorical">
+                    <span class="icon">👤</span>
+                    <div class="feature-name">Gender</div>
+                    <div class="feature-desc">Student's gender identity</div>
+                    <div class="feature-type">Categorical</div>
+                </div>
+
+                <!-- Feature 2: Race/Ethnicity -->
+                <div class="feature-card categorical">
+                    <span class="icon">🌍</span>
+                    <div class="feature-name">Race / Ethnicity</div>
+                    <div class="feature-desc">Student's racial or ethnic background</div>
+                    <div class="feature-type">Categorical</div>
+                </div>
+
+                <!-- Feature 3: Parental Education -->
+                <div class="feature-card categorical">
+                    <span class="icon">🎓</span>
+                    <div class="feature-name">Parental Education</div>
+                    <div class="feature-desc">Highest education level of parents/guardians</div>
+                    <div class="feature-type">Categorical</div>
+                </div>
+
+                <!-- Feature 4: Lunch -->
+                <div class="feature-card categorical">
+                    <span class="icon">🍽️</span>
+                    <div class="feature-name">Lunch Type</div>
+                    <div class="feature-desc">Standard or free/reduced lunch program</div>
+                    <div class="feature-type">Categorical</div>
+                </div>
+
+                <!-- Feature 5: Test Prep -->
+                <div class="feature-card categorical">
+                    <span class="icon">📝</span>
+                    <div class="feature-name">Test Preparation</div>
+                    <div class="feature-desc">Whether student completed test prep course</div>
+                    <div class="feature-type">Categorical</div>
+                </div>
+
+                <!-- Feature 6: Reading Score -->
+                <div class="feature-card numerical">
+                    <span class="icon">📖</span>
+                    <div class="feature-name">Reading Score</div>
+                    <div class="feature-desc">Student's reading test score (0-100)</div>
+                    <div class="feature-type">Numerical</div>
+                </div>
+
+                <!-- Feature 7: Writing Score -->
+                <div class="feature-card numerical">
+                    <span class="icon">✍️</span>
+                    <div class="feature-name">Writing Score</div>
+                    <div class="feature-desc">Student's writing test score (0-100)</div>
+                    <div class="feature-type">Numerical</div>
+                </div>
+
+                <!-- Bonus: Target Variable -->
+                <div class="feature-card target" style="background:rgba(255,255,255,0.08);border-color:rgba(255,215,0,0.15);">
+                    <span class="icon">🎯</span>
+                    <div class="feature-name">Math Score (Target)</div>
+                    <div class="feature-desc">The score we predict based on all features</div>
+                    <div class="feature-type">Predicted Output</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== HOW IT WORKS ===== -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="section-header">
+                <h2>⚡ How It Works</h2>
+                <p>3 simple steps to get your prediction</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h4>📝 Enter Student Data</h4>
+                    <p>
+                        Fill in the 7 required fields - demographic information and 
+                        reading/writing scores.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h4>🤖 AI Processes Data</h4>
+                    <p>
+                        Our ML models analyze your input using 7 different algorithms 
+                        with optimized parameters.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h4>🎯 Get Prediction</h4>
+                    <p>
+                        Receive an accurate math score prediction instantly, 
+                        based on the best performing model.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TECH EXCELLENCE (Previously "Why Choose Us" - moved here) ===== -->
+        <section class="tech-excellence" id="tech">
+            <div class="section-header">
+                <h2>🔬 Technical Excellence</h2>
+                <p>Built with industry-leading technologies for maximum accuracy</p>
+            </div>
+            <div class="excellence-grid">
+                <div class="excellence-card">
+                    <span class="icon">🤖</span>
+                    <h4>7 ML Models</h4>
+                    <p>Random Forest, XGBoost, CatBoost, and more with GridSearchCV optimization</p>
+                </div>
+                <div class="excellence-card">
+                    <span class="icon">📊</span>
+                    <h4>Data-Driven</h4>
+                    <p>Based on real student performance data with comprehensive preprocessing</p>
+                </div>
+                <div class="excellence-card">
+                    <span class="icon">⚡</span>
+                    <h4>Real-Time</h4>
+                    <p>Instant predictions with optimized pipeline processing</p>
+                </div>
+                <div class="excellence-card">
+                    <span class="icon">🔒</span>
+                    <h4>Privacy First</h4>
+                    <p>No data storage - all processing is done in real-time</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA SECTION ===== -->
+        <section class="cta-section" id="demo">
+            <div class="cta-box">
+                <h2>Ready to Predict?</h2>
+                <p>
+                    Start predicting student math scores now with our powerful ML models.
+                    It's free, fast, and incredibly accurate!
+                </p>
+                <div class="cta-buttons">
+                    <a href="/predictdata" class="btn-primary">
+                        🚀 Get Started Now
+                    </a>
+                    <a href="#features" class="btn-secondary">
+                        📋 View All Features
+                    </a>
+                    <a href="#" class="btn-outline">
+                        💡 See Examples
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer" id="contact">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>🎓 ScorePredict Pro</h3>
+                    <p>
+                        Intelligent student performance prediction using machine learning.
+                        Built with Python, Flask, and Scikit-learn.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="/">Home</a>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="/predictdata">Predict Now</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Tech Stack</h4>
+                    <a href="#">Python</a>
+                    <a href="#">Flask</a>
+                    <a href="#">Scikit-learn</a>
+                    <a href="#">XGBoost</a>
+                    <a href="#">CatBoost</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="#">GitHub</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Email</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2026 ScorePredict Pro. Made with ❤️ by Girish Kumar.
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -2,7 +2,7 @@ import sys
 import os
 import pandas as pd
 from src.exception import CustomException
-from src.utils import load_object
+from src.utils import save_object, load_object, clamp_predictions
 
 
 class PredictPipeline:
@@ -19,6 +19,7 @@ class PredictPipeline:
             print("After Loading")
             data_scaled=preprocessor.transform(features)
             preds=model.predict(data_scaled)
+            preds = clamp_predictions(preds, 0, 100)
             return preds
         
         except Exception as e:
